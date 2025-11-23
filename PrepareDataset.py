@@ -49,4 +49,4 @@ def create_yolo_testset(image_folder, label_folder, output_folder="yolo_testset"
     print(f"Pairs saved to: {pairs_file}")
 
 # Example usage
-create_yolo_testset(".\images", ".\labels", ".\yolo_testset")
+create_yolo_testset(".\images", "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025/labels", ".\yolo_testset")

@@ -1,0 +1,62 @@
+import os
+import random
+import shutil
+
+# ==== CONFIGURACIÓN ====
+SOURCE_IMAGES = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025/yolo_testset"   # carpeta donde están los JPG
+SOURCE_LABELS = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025/yolo_testset"     # carpeta donde están los TXT
+OUTPUT_DIR = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025"     # carpeta de salida
+
+TRAIN_RATIO = 0.8  # 80% train, 20% test
+
+# ============================================
+
+def main():
+    # Crear carpetas de salida
+    train_img = os.path.join(OUTPUT_DIR, "train/images")
+    train_lbl = os.path.join(OUTPUT_DIR, "train/labels")
+    test_img  = os.path.join(OUTPUT_DIR, "test/images")
+    test_lbl  = os.path.join(OUTPUT_DIR, "test/labels")
+
+    for d in [train_img, train_lbl, test_img, test_lbl]:
+        os.makedirs(d, exist_ok=True)
+
+    # Obtener lista de imágenes
+    images = [f for f in os.listdir(SOURCE_IMAGES)
+              if f.lower().endswith((".jpg", ".png"))]
+
+    # Mezclar aleatoriamente
+    random.shuffle(images)
+
+    # Dividir
+    train_count = int(len(images) * TRAIN_RATIO)
+    train_files = images[:train_count]
+    test_files  = images[train_count:]
+
+    # Función para copiar pares imagen + txt
+    def copy_pair(filename, dst_img_folder, dst_lbl_folder):
+        name, _ = os.path.splitext(filename)
+        img_path = os.path.join(SOURCE_IMAGES, filename)
+        txt_path = os.path.join(SOURCE_LABELS, name + ".txt")
+
+        shutil.copy(img_path, dst_img_folder)
+
+        if os.path.exists(txt_path):
+            shutil.copy(txt_path, dst_lbl_folder)
+        else:
+            print(f"⚠️ Aviso: No existe label para {filename}")
+
+    # Copiar train
+    for f in train_files:
+        copy_pair(f, train_img, train_lbl)
+
+    # Copiar test
+    for f in test_files:
+        copy_pair(f, test_img, test_lbl)
+
+    print("✔ División completada.")
+    print(f"Train: {len(train_files)}   Test: {len(test_files)}")
+
+
+if __name__ == "__main__":
+    main()

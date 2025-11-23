@@ -1,0 +1,7 @@
+yellow
+red
+olive
+maroon
+black
+green
+white
