@@ -3,9 +3,9 @@ import random
 import shutil
 
 # ==== CONFIGURACIÓN ====
-SOURCE_IMAGES = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025/yolo_testset"   # carpeta donde están los JPG
-SOURCE_LABELS = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025/yolo_testset"     # carpeta donde están los TXT
-OUTPUT_DIR = "C:/Users/inigo.infante/Downloads/Releaseme2/LeRobotHackaton2025"     # carpeta de salida
+SOURCE_IMAGES = "./yolo_testset"   # carpeta donde están los JPG
+SOURCE_LABELS = "./yolo_testset"     # carpeta donde están los TXT
+OUTPUT_DIR = "./LeRobotHackaton2025"     # carpeta de salida
 
 TRAIN_RATIO = 0.8  # 80% train, 20% test
 
