@@ -1,0 +1,5 @@
+train: C:/Users/enetz.q/Downloads/YOLOModel/images/train
+val: C:/Users/enetz.q/Downloads/YOLOModel/images/val
+
+nc: 7
+names: ['yellow', 'red', 'olive', 'maroon', 'black', 'green', 'white']
